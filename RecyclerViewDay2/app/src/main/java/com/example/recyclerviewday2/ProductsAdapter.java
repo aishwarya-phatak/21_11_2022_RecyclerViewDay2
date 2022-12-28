@@ -1,10 +1,12 @@
 package com.example.recyclerviewday2;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductViewHolder> {
+
     TextView txtProductTitle,txtProductPrice;
     ImageView imgProduct;
     Product product;
@@ -26,6 +29,24 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            imgProduct = itemView.findViewById(R.id.imgProduct);
+            imgProduct.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                        Product product = products.get(getAdapterPosition());
+                        Intent intent = new Intent(v.getContext(),ProductsDetailActivity.class);
+
+                            intent.putExtra("id",product.getId());
+                            intent.putExtra("imageId",product.getImageId());
+                            intent.putExtra("title",product.getTitle());
+                            intent.putExtra("price",product.getPrice());
+
+                            v.getContext().startActivity(intent);
+                        }
+                    }
+            );
+
 
 
         }
@@ -39,14 +60,30 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         imgProduct = view.findViewById(R.id.imgProduct);
         imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view1) {
+                Toast.makeText(view1.getContext(), "image Clicked", Toast.LENGTH_LONG).show();
+            }
+        });
 
+        txtProductTitle = view.findViewById(R.id.txtProductTitle);
+        txtProductTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "txtTitleClicked", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        txtProductPrice = view.findViewById(R.id.txtProductPrice);
+
+        txtProductPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(view.getContext(), "txtPriceClicked", Toast.LENGTH_LONG).show();
             }
         });
 
 
-
-        return null;
+        return new ProductViewHolder(view);
     }
 
     @Override
@@ -56,6 +93,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     @Override
     public int getItemCount() {
-        return 0;
+        return products.size();
     }
 }
