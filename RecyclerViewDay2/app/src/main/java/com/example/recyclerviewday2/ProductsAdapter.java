@@ -37,18 +37,17 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                         Product product = products.get(getAdapterPosition());
                         Intent intent = new Intent(v.getContext(),ProductsDetailActivity.class);
 
-                            intent.putExtra("id",product.getId());
+                          /*  intent.putExtra("id",product.getId());
                             intent.putExtra("imageId",product.getImageId());
                             intent.putExtra("title",product.getTitle());
                             intent.putExtra("price",product.getPrice());
 
+                           */
+                            intent.putExtra("product",product);
                             v.getContext().startActivity(intent);
                         }
                     }
             );
-
-
-
         }
     }
 
@@ -58,7 +57,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.product_view,null);
         imgProduct = view.findViewById(R.id.imgProduct);
-        imgProduct.setOnClickListener(new View.OnClickListener() {
+        /*imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view1) {
                 Toast.makeText(view1.getContext(), "image Clicked", Toast.LENGTH_LONG).show();
@@ -82,13 +81,39 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             }
         });
 
-
+*/
         return new ProductViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ProductsAdapter.ProductViewHolder holder, int position) {
+        
+        Product product = products.get(position);
+/*
+        holder.itemView.findViewById(R.id.imgProduct).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(v.getContext(),product.getImageId()+"",Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
 
+        holder.itemView.findViewById(R.id.txtProductTitle).setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(v.getContext(),product.getTitle(),Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+
+        holder.itemView.findViewById(R.id.txtProductPrice).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),product.getPrice()+"",Toast.LENGTH_LONG).show();
+            }
+        });*/
     }
 
     @Override

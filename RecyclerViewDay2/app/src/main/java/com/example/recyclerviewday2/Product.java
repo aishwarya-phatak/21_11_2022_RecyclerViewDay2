@@ -1,6 +1,8 @@
 package com.example.recyclerviewday2;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private int id;
     private String txtTitle;
     private int price;
